@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SLEEP Time</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            height: 100vh;
+            background: #000;
+            position: relative;
+            font-family:'Tajawal', sans-serif;
+        }
+
+        .background1, .background2, .background3 {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: 1;
+        }
+
+        .background1 {
+            background: url("{{ url_for('static', filename='pic/chess.jpg') }}") no-repeat center center;
+            top: 0;
+            background-size: cover;
+            animation: moveUp 1.5s forwards;
+        }
+
+        .background2 {
+            background: url("{{ url_for('static', filename='pic/nice.png') }}") no-repeat center center;
+            top: -100%;
+            background-size: cover;
+            z-index: 2;
+            opacity: 1;
+            transition: top 1.5s ease-in-out, opacity 2s ease-in-out 1.5s;
+        }
+
+        .background3 {
+            background: url("{{ url_for('static', filename='pic/logo.png') }}") no-repeat center center; /* Update with your logo path */
+            background-size: contain;
+            width: 300px; /* Adjust the size of the logo */
+            height: 300px; /* Adjust the size of the logo */
+            top: 100%; /* Start from the bottom */
+            left: 50%;
+            transform: translate(-50%, 100%); /* Position at the bottom, off-screen */
+            z-index: 4;
+            transition: top 1.5s ease-in-out, transform 1.5s ease-in-out;
+            filter: drop-shadow(0 0 8px rgb(255, 218, 55)); /* Add glow effect */
+}
+
+
+        .video-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            transition: transform 1s ease-out;
+            z-index: 3;
+            max-width: 800px;
+            height: auto;
+        }
+
+        .video-container.visible {
+            transform: translate(-50%, -50%) scale(1.6);
+        }
+
+        .video-container iframe {
+            width: auto;
+            height: auto;
+            border: none;   
+        }
+
+        @keyframes moveUp {
+            from { top: 100%; }
+            to { top: 0; }
+        }
+
+        @keyframes buttonAppear {
+            from {
+                transform: translateX(-50%) scale(0.5);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(-50%) scale(1);
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .background1, .background2 {
+                background-size: cover;
+            }
+
+            .video-container {
+                width: 95%;
+            }
+
+            .video-container.visible {
+                transform: translate(-50%, -50%) scale(1); 
+            }
+        }
+                
+            #buttonContainer {
+                position: absolute;
+                top: 20%; /* يمكنك تعديل هذا الرقم لتغيير الموقع العمودي */
+                left: 50%;
+                transform: translateX(-50%); /* محاذاة الحاوية في المنتصف أفقيًا */
+                display: flex;
+                gap: 20px; /* المسافة بين الأزرار */
+                z-index: 5;
+            }
+
+            #playButton, #stopButton {
+                width: 150px; /* عرض الزر */
+                height: 50px; /* ارتفاع الزر */
+                background-color: #808080;
+                color: #fff;
+                border: none;
+                border-radius: 10px;
+                cursor: pointer;
+                font-size: 18px;
+                font-weight: bold;
+                opacity: 0;
+                transform: scale(0.5); /* تطبيق التحويل لتصغير الأزرار بدون التأثير على المحاذاة */
+                animation: buttonAppear 1s forwards ease-in-out;
+                animation-delay: 1.5s;
+                transition: background-color 0.3s;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-family: 'Tajawal', sans-serif;
+            }
+
+            @keyframes buttonAppear {
+                from {
+                    opacity: 0;
+                    transform: scale(0.5);
+                }
+                to {
+                    opacity: 1;
+                    transform: scale(1);
+                }
+            }
+
+
+
+
+        #playButton:hover, #stopButton:hover {
+            background-color: #606060;
+        }
+
+        .background1.darkened {
+            transition: opacity 3s ease-in-out;
+            opacity: 0.3; /* Darken by reducing opacity */
+        }
+        #mainpagebuuton {
+            display: none ;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 15px;
+            background-color: rgb(6, 90, 97);
+            color: white;
+            border: none;
+            border-radius: 50%; /* جعل الزر دائريًا */
+            text-decoration: none;
+            text-align: center;
+            font-size: 20px;
+            display: inline-block;
+            cursor: pointer;
+            z-index: 100; /* تأكد من أن الزر يظهر فوق المحتوى */
+        }
+        #t {
+            color: white;
+            text-align: center;
+            font-size: 20px;
+            text-decoration: none;
+        }
+        
+        
+    </style>
+</head>
+<body>
+    <button id="mainpagebuuton" ><a id="t" href="{{ url_for('home') }}">Go Back</a></button>
+    <div class="background1" id="background1"></div>
+    <div class="background2" id="background2"></div>
+    <div class="background3" id="background3"></div>
+
+    <div class="video-container" id="videoContainer">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/K8xcPhsaris?si=V04GPKN-Or4BbsQk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+
+    <div id="buttonContainer">
+        <button id="playButton">شغلني </button>
+        <button id="stopButton">طفيني </button>
+    </div>
+
+    <audio id="audio" src="{{ url_for('static', filename='sound.mp3') }}" preload="auto"></audio>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var playButton = document.getElementById('playButton');
+        var stopButton = document.getElementById('stopButton');
+        var audio = document.getElementById('audio');
+        var background1 = document.getElementById('background1');
+        var background2 = document.getElementById('background2');
+        var background3 = document.getElementById('background3');
+        var videoContainer = document.getElementById('videoContainer');
+        var mainPageButton = document.getElementById('mainpagebuuton');
+    
+        // Handle animations
+        background1.addEventListener('animationend', function() {
+            background2.style.top = '0';
+            background2.addEventListener('transitionend', function() {
+                background2.style.opacity = '0.5';
+                videoContainer.classList.add('visible');
+            });
+        });
+    
+        videoContainer.addEventListener('transitionend', function() {
+            background3.style.top = 'calc(100% - 150px)';
+            background3.style.transform = 'translate(-50%, -50%)';
+    
+            // Darken the first background slowly after the logo appears
+            setTimeout(function() {
+                background1.classList.add('darkened');
+            }, 1500);
+        });
+    
+        // Show the Home button after the logo and background transitions have finished
+        background3.addEventListener('transitionend', function() {
+            setTimeout(function() {
+                mainPageButton.style.display = 'inline-block'; // Show the button
+                mainPageButton.style.opacity = '1'; // Fade in effect (if you want)
+            }, 1500); // Adjust the delay to match the timing of your transitions
+        });
+    
+        // Play audio on button click
+        playButton.addEventListener('click', function() {
+            audio.play();
+        });
+    
+        // Stop audio on button click
+        stopButton.addEventListener('click', function() {
+            audio.pause();
+            audio.currentTime = 0;
+        });
+    });
+    
+    </script>
+</body>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mr Robot House</title>
+    <style>
+        /* General Styles */
+        body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)), 
+                url("{{ url_for('static', filename='pic/Mr-Robot-Film-Locations-Chinatown-Elliot-Apartment-Lower-East-Side-217-East-Broadway-NYC.jpg')}}") no-repeat center center;
+    background-size: contain;
+    background-color: #000000;
+    color: white;
+    overflow: hidden;
+}
+
+        
+        /* Container for the animation */
+        .programming-page {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            position: relative;
+            text-align: center; /* Center text horizontally */
+        }
+
+        /* Container for each word */
+        .word-container {
+            position: absolute;
+            font-size: 5rem;
+            opacity: 0;
+            transform: scale(0.5);
+            animation: wordAnimation 6s infinite; /* Infinite loop */
+        }
+
+        /* Keyframes for word animation */
+        @keyframes wordAnimation {
+            0% {
+                opacity: 0;
+                transform: scale(0.5);
+                color: cyan;
+            }
+            20% {
+                opacity: 1;
+                transform: scale(4);
+                color: red;
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1);
+                color: palevioletred;
+            }
+            80% {
+                opacity: 0;
+                transform: scale(0.5);
+                color: palevioletred;
+            }
+            100% {
+                opacity: 0;
+                transform: scale(0.5);
+                color: cyan;
+            }
+        }
+
+        /* Style for the Go Back button */
+        .go-back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 50px;
+            height: 50px;
+            background-color: #ff812a;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            display: none; /* Initially hidden */
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            text-align: center;
+            cursor: pointer;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            opacity: 0; /* Initial opacity */
+            animation: fadeIn 1s forwards; /* Animation for fading in */
+        }
+
+        /* Keyframes for fade-in animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .go-back-button:hover {
+            background-color: #b34141;
+        }
+
+        /* Media Queries for responsiveness */
+        @media (max-width: 768px) {
+            .word-container {
+                font-size: 3rem; /* Adjust font size for smaller screens */
+            }
+
+            .go-back-button {
+                width: 40px;
+                height: 40px;
+                font-size: 12px; /* Adjust font size for the button */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .word-container {
+                font-size: 2rem; /* Further adjust font size for very small screens */
+            }
+
+            .go-back-button {
+                width: 30px;
+                height: 30px;
+                font-size: 10px; /* Further adjust font size for the button */
+            }
+        }
+
+    </style>
+</head>
+<body>
+    
+    <div class="programming-page">
+        <div class="word-container" style="animation-delay: 0s;">
+            <span class="word">I AM</span>
+        </div>
+        <div class="word-container" style="animation-delay: 2s;">
+            <span class="word">still</span>
+        </div>
+        <div class="word-container" style="animation-delay: 4s;">
+            <span class="word">learning</span>
+        </div>
+    </div>
+    <!-- Go Back Button -->
+    <a href="{{ url_for('home') }}" class="go-back-button">Go Back</a>
+
+    <script>
+        // JavaScript to show the Go Back button after the "learning" word animation ends
+        const goBackButton = document.querySelector('.go-back-button');
+        const animationDuration = 2500; // Duration of the animation cycle in milliseconds
+
+        // Show the Go Back button and trigger fade-in animation after the animation ends
+        setTimeout(() => {
+            goBackButton.style.display = 'flex'; // Change display to flex to show the button
+            goBackButton.style.animationPlayState = 'running'; // Start the fade-in animation
+        }, animationDuration);
+    </script>
+</body>
+</html>

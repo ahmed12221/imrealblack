@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>games</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/stylesg.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&display=swap" rel="stylesheet">
+    <style>
+            body {
+        font-family: 'Tajawal', sans-serif; /* استخدام الخط العربي */
+        font-weight: 400; /* وزن الخط العادي */
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(
+            to bottom, /* التدرج من الأعلى إلى الأسفل */
+            rgba(14, 0, 0, 0.9), /* الشفافية في الأعلى */
+            #00000099 /* التظليل الداكن في الأسفل */
+        ), url("{{ url_for('static', filename='pic/774615.jpg') }}") no-repeat center center;
+        background-attachment: fixed; /* يثبت الخلفية عند التمرير */
+        background-size: cover; /* تأكد من تغطية الخلفية بشكل صحيح */
+        }
+
+    </style>
+
+</head>
+<body>
+    <!-- Banner Section -->
+    <div class="banner">
+        <h1>العاب لعبتها</h1>
+        <button id="mainpagebuuton" ><a id="t" href="{{ url_for('home') }}">Go back</a></button>
+    </div>
+    <!-- main page -->
+     
+
+    <!-- Games Section -->
+    <div class="games-container">
+        <!-- Example Game Circle -->
+        <div class="game-circle" data-game="1">
+            <img src="{{ url_for('static', filename='pic/capsule_616x353.jpg') }}"alt="game1">
+        </div>
+        <div class="game-circle" data-game="2">
+            <img src="{{ url_for('static', filename='pic/elden-ring-plakat.webp') }}" alt="game2">
+        </div>
+        <div class="game-circle" data-game="3">
+            <img src="{{ url_for('static', filename='pic/Overwatch_cover_art.jpg') }}" alt="game3">
+        </div>
+        <div class="game-circle" data-game="4">
+            <img src="{{ url_for('static', filename='pic/red-bull-campus-clutch-new-zealand.avif') }}" alt="game4">
+        </div>
+        <div class="game-circle" data-game="5">
+            <img src="{{ url_for('static', filename='pic/paragon.jpg') }}" alt="game5">
+        </div>
+        <div class="game-circle" data-game="6">
+            <img src="{{ url_for('static', filename='pic/fortnite.png') }}" alt="game6">
+        </div>
+        <div class="game-circle" data-game="7">
+            <img src="{{ url_for('static', filename='pic/brawl.jpg') }}" alt="game7">
+        </div>
+        <!-- Add more game circles similarly -->
+    </div>
+
+    <!-- Modal for Game Details -->
+    <div id="gameModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="gameTitle"></h2>
+            <p id="gameReview"></p>
+            <div id="gameRating" class="stars"></div>
+        </div>
+    </div>
+    <script>
+        var games = [
+            { title: "SEKIRO", review: 'لعبة ممتازة رجعت لي الشغف للالعاب', rating: 5, background: 'url("{{ url_for('static', filename='pic/S-background-2.jpg') }}")' },
+            { title: "ELDEN RING", review: "يجي منها", rating: 4.5, background: 'url("{{ url_for('static', filename='pic/e-background.png') }}")' },
+            { title: "OVERWATCH", review: "ختفو على لعبة الشواذ هذي", rating: 1, background: 'url("{{ url_for('static', filename='pic/o-background.png') }}")' },
+            { title: "VALORANT", review: "لعبة ممتازة مجتمعها يفتقر للحنان ومازوخيين", rating: 3.5, background: 'url("{{ url_for('static', filename='pic/v-background.png') }}")' },
+            { title: "PARAGON: THE OVERPRIME", review: "افضل لعبة لعبتها منذ ولادتي ادمنت عليها وتدهورت حياتي واضطريت اعيش 3 اسابيع في الشارع بسبب اني فقدت وظيفتي وزوجتي طلقتني وتراكمت علي الديون لكن اللعبة تستاهل صراحة تجربة ممتعة عيال الكلب المطورين قفلوا السيرفرات بعد ما شالو فلوس الناس وسحبو عليهم لكن ما قد شحنت فيها عوافي ككل اللعبة رائعة واذا نزلت ثاني بلعبها", rating: 5, background: 'url("{{ url_for('static', filename='pic/p-background.png') }}")' },
+            { title: "FORTNITE", review: "لعبة اسطورية على وقتها جت بفكرة جديدة ودعست على كل الالعاب الثانية لانها كانت فكرة بنت كلب ومجانية بعد", rating: 5, background: 'url("{{ url_for('static', filename='pic/f-background.jpg') }}")' },
+            { title: "BRAWLHALLA", review: "لعبة زبالة وترفع الضغط", rating: 2, background: 'url("{{ url_for('static', filename='pic/b-background.jpg') }}")' }
+            // يمكنك إضافة المزيد من الألعاب هنا
+        ];
+    </script>
+
+
+    <script src="{{ url_for('static', filename='js/scriptsg.js') }}"></script>
+
+</body>
+</html>

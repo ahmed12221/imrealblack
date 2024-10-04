@@ -1,0 +1,317 @@
+/* خصائص التصميم العامة */
+/* تحديد الخط الأساسي للموقع، خلفية بتدرج لوني، ولون النص الأساسي */
+body {
+    font-family: 'Kalam', cursive;
+    background: linear-gradient(135deg, #1d3d47, #ff812a, #b34141, #1891e1);
+    color: white;
+}
+
+/* أنماط البانر */
+/* إعداد خلفية البانر بلون غامق، لون النص، وتوسيط المحتوى */
+.banner {
+    background-color: #2e2e2e;
+    color: white;
+    padding: 1px 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Styles for the banner text */
+#up-text-banner {
+    font-size: 25px;
+    display: inline-block;
+    white-space: nowrap;
+    animation: scroll-left 10s linear infinite;
+}
+
+/* تحديد لون النص المميز داخل البانر */
+.highlight-text {
+    color: #ff812a;
+}
+
+
+/* Keyframes for scrolling text */
+@keyframes scroll-left {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+/* Media Queries for Responsive Banner */
+@media (max-width: 768px) {
+    #up-text-banner {
+        font-size: 20px; /* Adjust font size for smaller screens */
+        animation: scroll-left 8s linear infinite; /* Increase speed for smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    #up-text-banner {
+        font-size: 16px; /* Further adjust font size for very small screens */
+        animation: scroll-left 7s linear infinite; /* Increase speed further for very small screens */
+    }
+}
+
+/* أنماط بانر الصور */
+/* إعداد حجم بانر الصور وتوسيط محتوى البانر بشكل عامودي وأفقي */
+.image-banner {
+    width: 100%;
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* إعداد صورة البانر لتكون بحجم الشاشة وإضافة تأثير الضبابية */
+.image-banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    filter: blur(2px);
+}
+
+/* إنشاء خلفية مشوشة فوق الصورة لجعل النص يظهر بشكل أفضل */
+.blurred-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+/* إعداد حاوية النص داخل بانر الصورة وتوسيطها */
+.hello-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 2;
+}
+
+/* إعداد النصوص داخل بانر الصورة */
+.hello-text, .description-text {
+    font-weight: bold;
+    text-align: center;
+}
+
+/* إعداد حجم النص الرئيسي داخل بانر الصورة */
+.hello-text {
+    font-size: 10rem;
+}
+
+/* إعداد حجم النص الثانوي داخل بانر الصورة */
+.description-text {
+    font-size: 2rem;
+    white-space: nowrap;
+}
+
+/* أنماط معرض الصور */
+/* إعداد تخطيط معرض الصور بتوزيع الصور على امتداد الصفحة */
+.image-gallery {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 9rem;
+    padding: 1rem;
+    flex-wrap: wrap;
+}
+
+/* إعداد أنماط عناصر معرض الصور: الإطار، الظل، والحركة عند التمرير */
+.gallery-item {
+    border: 1px solid black;
+    width: 30%;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    overflow: hidden;
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.8);
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;
+}
+
+/* تكبير الصورة عند التمرير فوق العنصر */
+.gallery-item:hover {
+    transform: scale(1.1);
+}
+
+/* إعداد الصور داخل عناصر معرض الصور */
+.gallery-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+/* إعداد النص المتراكب على الصور داخل عناصر معرض الصور */
+.gallery-item .overlay {
+    position: relative; /* لضمان بقاء العنصر shine داخل العنصر الأصلي */
+    overflow: hidden; /* لمنع التأثير من الخروج عن حدود الصورة */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    color: #f8ecec;
+    font-size: 1.5rem;
+    text-align: center;
+    z-index: 1000;
+    transition: opacity 0.3s ease;
+}
+
+/* إضافة تأثير اللمعان على الصور في معرض الصور */
+.gallery-item::before {
+    content: '';
+    position: absolute;
+    top: -150%;
+    left: -150%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0));
+    transform: rotate(45deg);
+    transition: all 0.5s ease;
+}
+
+/* تحريك تأثير اللمعان عند التمرير فوق العنصر */
+.gallery-item:hover::before {
+    top: 100%;
+    left: 100%;
+}
+
+/* إخفاء النص المتراكب عند التمرير فوق العنصر */
+.gallery-item:hover .overlay {
+    opacity: 0;
+}
+
+/* Footer Styles */
+/* إعداد أنماط الفوتر: اللون، التوسيط، والروابط */
+.footer {
+    background-color: #2e2e2e;
+    color: white;
+    padding: 2rem 0;
+    text-align: center;
+}
+
+/* إعداد أنماط الروابط داخل الفوتر */
+.footer a {
+    color: #ff812a;
+    text-decoration: none;
+}
+
+/* إضافة تأثير التسطير عند التمرير فوق الروابط في الفوتر */
+.footer a:hover {
+    text-decoration: underline;
+}
+
+/* إعداد روابط التواصل الاجتماعي داخل الفوتر */
+.footer .social-links a {
+    margin: 0 10px;
+    font-size: 1.2rem;
+}
+
+
+/* Contact Section Styles */
+/* إعداد أنماط قسم التواصل: الحشو، الخلفية، والألوان */
+.contact {
+    padding: 3rem 0;
+    background-color: #1d3d47;
+}
+
+/* إعداد أنماط عنوان قسم التواصل */
+.contact h2 {
+    color: #ff812a;
+    margin-bottom: 1rem;
+}
+
+/* إعداد أنماط عناصر النموذج داخل قسم التواصل */
+.contact .form-group {
+    margin-bottom: 1rem;
+}
+
+/* إعداد أنماط تسميات الحقول داخل قسم التواصل */
+.contact label {
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+/* إعداد أنماط حقول النصوص والمناطق داخل قسم التواصل */
+.contact input, .contact textarea {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* إعداد أنماط زر الإرسال داخل قسم التواصل */
+.contact button {
+    background-color: #ff812a;
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* تغيير لون زر الإرسال عند التمرير فوقه */
+.contact button:hover {
+    background-color: #b34141;
+}
+
+/* Scroll to Top Button Styles */
+/* إعداد أنماط زر العودة إلى الأعلى: الموقع، الحجم، الألوان، والظل */
+.scroll-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #ff812a;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    text-decoration: none;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+}
+
+/* تغيير لون زر العودة إلى الأعلى عند التمرير فوقه */
+.scroll-to-top:hover {
+    background-color: #b34141;
+}
+
+
+/* Media Queries لجعل التصميم متجاوب */
+/* ضبط حجم النصوص وتخطيط العناصر لجعل الموقع متجاوب على الأجهزة الصغيرة */
+@media (max-width: 768px) {
+    .hello-text {
+        font-size: 5rem; /* تصغير حجم النص في البانر على الأجهزة الصغيرة */
+    }
+
+    .description-text {
+        font-size: 1.5rem; /* تصغير حجم النص في البانر على الأجهزة الصغيرة */
+    }
+
+    .image-banner {
+        height: 300px; /* تقليل ارتفاع البانر على الأجهزة الصغيرة */
+    }
+
+    .image-gallery {
+        flex-direction: column; /* تكديس الصور عمودياً على الأجهزة الصغيرة */
+    }
+
+    .gallery-item {
+        width: 80%; /* جعل عرض الصور 80% من الشاشة على الأجهزة الصغيرة */
+    }
+}
